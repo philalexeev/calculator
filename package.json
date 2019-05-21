@@ -1,0 +1,51 @@
+{
+  "name": "prj1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development gulp dev",
+    "production": "cross-env NODE_ENV=production gulp build"
+  },
+  "author": "phil alexeev",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "latest",
+    "@babel/preset-env": "latest",
+    "autoprefixer": "latest",
+    "babel-loader": "latest",
+    "browser-sync": "latest",
+    "cross-env": "latest",
+    "css-mqpacker": "latest",
+    "del": "latest",
+    "eslint": "latest",
+    "gulp": "latest",
+    "gulp-csso": "latest",
+    "gulp-html-beautify": "latest",
+    "gulp-if": "latest",
+    "gulp-imagemin": "latest",
+    "gulp-newer": "latest",
+    "gulp-plumber": "latest",
+    "gulp-postcss": "latest",
+    "gulp-pug": "latest",
+    "gulp-rename": "latest",
+    "gulp-sass": "latest",
+    "gulp-sourcemaps": "latest",
+    "gulp-stylus": "latest",
+    "gulp-svgmin": "latest",
+    "gulp-svgstore": "latest",
+    "gulp-uglify": "latest",
+    "gulp-webp": "latest",
+    "gulplog": "latest",
+    "node-sass": "latest",
+    "path": "latest",
+    "rollup": "latest",
+    "rollup-plugin-babel": "latest",
+    "vinyl-named": "latest",
+    "webpack-stream": "latest"
+  },
+  "dependencies": {
+    "rollup-plugin-uglify": "^6.0.1",
+    "vue": "^2.6.10"
+  }
+}
