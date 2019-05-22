@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.min';
+import Vue from 'vue/dist/vue';
 
 let calculator = new Vue({
 	el: '.calculator',
@@ -6,7 +6,8 @@ let calculator = new Vue({
 		currentValue: '0',
 		operator: null,
 		previousValue: null,
-		isNewValue: false
+		isNewValue: false,
+		passedValue: ''
 	},
 	methods: {
 		append(num) {
@@ -24,7 +25,11 @@ let calculator = new Vue({
 			}
 		},
 		clear() {
-			this.currentValue = '0'
+			this.currentValue = '0';
+			this.operator = null;
+			this.previousValue = null;
+			this.isNewValue = false;
+			this.passedValue = '';
 		},
 		negative() {
 			if ( this.currentValue > 0 ) {
@@ -36,16 +41,47 @@ let calculator = new Vue({
 		percent() {
 			this.currentValue = `${this.currentValue / 100}`
 		},
-		divide() {
-			this.operator = (a, b) => a / b;
+		setValues() {
 			this.previousValue = this.currentValue;
 			this.isNewValue = true;
 		},
+		passedCalculation() {
+			if ( this.operator ) {
+				this.passedValue = this.operator(this.previousValue, this.currentValue);
+			}
+		},
+		divide() {
+			this.passedCalculation();
+			this.operator = (a, b) => a / b;
+			this.setValues();
+		},
+		times() {
+			this.passedCalculation();
+			this.operator = (a, b) => a * b;
+			this.setValues();
+		},
+		minus() {
+			this.passedCalculation();
+			this.operator = (a, b) => a - b;
+			this.setValues();
+		},
+		plus() {
+			this.passedCalculation();
+			this.operator = (a, b) => parseFloat(a) + parseFloat(b);
+			this.setValues();
+		},
 		equal() {
-			this.currentValue = this.operator(
-				this.previousValue,
-				this.currentValue
-			)
+			if ( this.passedValue ) {
+				this.currentValue = this.operator(
+					this.passedValue,
+					this.currentValue
+				)
+			} else {
+				this.currentValue = this.operator(
+					this.previousValue,
+					this.currentValue
+				)
+			}
 		}
 	}
 });

@@ -7,15 +7,15 @@
 	button(type='button').grid-item(@click='append(7)') 7
 	button(type='button').grid-item(@click='append(8)') 8
 	button(type='button').grid-item(@click='append(9)') 9
-	button(type='button').grid-item.operator &times;
+	button(type='button').grid-item.operator(@click='times') &times;
 	button(type='button').grid-item(@click='append(4)') 4
 	button(type='button').grid-item(@click='append(5)') 5
 	button(type='button').grid-item(@click='append(6)') 6
-	button(type='button').grid-item.operator -
+	button(type='button').grid-item.operator(@click='minus') -
 	button(type='button').grid-item(@click='append(1)') 1
 	button(type='button').grid-item(@click='append(2)') 2
 	button(type='button').grid-item(@click='append(3)') 3
-	button(type='button').grid-item.operator +
+	button(type='button').grid-item.operator(@click='plus') +
 	button(type='button').grid-item.zero(@click='append(0)') 0
 	button(type='button').grid-item(@click='appendDot') .
 	button(type='button').grid-item.operator(@click='equal') =
