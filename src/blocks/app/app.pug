@@ -1,5 +1,7 @@
 .calculator
-	p.display {{ currentValue }}
+	div.display
+		.display__inner
+			p.display__result {{ currentValue }}
 	button(type='button').grid-item(@click='clear') C
 	button(type='button').grid-item(@click='negative') +/-
 	button(type='button').grid-item(@click='percent') %

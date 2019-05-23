@@ -7,7 +7,7 @@ let calculator = new Vue({
 		operator: null,
 		previousValue: null,
 		isNewValue: false,
-		passedValue: ''
+		afterEquals: false
 	},
 	methods: {
 		append(num) {
@@ -29,7 +29,6 @@ let calculator = new Vue({
 			this.operator = null;
 			this.previousValue = null;
 			this.isNewValue = false;
-			this.passedValue = '';
 		},
 		negative() {
 			if ( this.currentValue > 0 ) {
@@ -46,42 +45,40 @@ let calculator = new Vue({
 			this.isNewValue = true;
 		},
 		passedCalculation() {
-			if ( this.operator ) {
-				this.passedValue = this.operator(this.previousValue, this.currentValue);
+			if ( this.previousValue && !this.afterEquals ) {
+				this.previousValue = this.operator(
+					this.previousValue,
+					this.currentValue
+				);
+				this.isNewValue = true;
+			} else {
+				this.setValues();
+				this.afterEquals = false;
 			}
 		},
 		divide() {
 			this.passedCalculation();
-			this.operator = (a, b) => a / b;
-			this.setValues();
+			this.operator = (a, b) => `${a / b}`;
 		},
 		times() {
 			this.passedCalculation();
-			this.operator = (a, b) => a * b;
-			this.setValues();
+			this.operator = (a, b) => `${a * b}`;
 		},
 		minus() {
 			this.passedCalculation();
-			this.operator = (a, b) => a - b;
-			this.setValues();
+			this.operator = (a, b) => `${a - b}`;
 		},
 		plus() {
 			this.passedCalculation();
-			this.operator = (a, b) => parseFloat(a) + parseFloat(b);
-			this.setValues();
+			this.operator = (a, b) => `${parseFloat(a) + parseFloat(b)}`;
 		},
 		equal() {
-			if ( this.passedValue ) {
-				this.currentValue = this.operator(
-					this.passedValue,
-					this.currentValue
-				)
-			} else {
-				this.currentValue = this.operator(
-					this.previousValue,
-					this.currentValue
-				)
-			}
+			this.currentValue = this.operator(
+				this.previousValue,
+				this.currentValue
+			);
+			this.setValues();
+			this.afterEquals = true;
 		}
 	}
 });
